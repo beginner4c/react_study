@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- react에서 요소를 만드는 방법과 만들어낸 조각들을 하나의 컨테이너에서 묶는 방법을 본다 -->
+<html>
+    <body>
+        <div id="root">...</div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <!-- babel을 통해야 react 코드를 웹 브라우저가 알아먹게 변환해 렌더링시킬 수 있다 -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+        const root = document.getElementById("root");
+
+        // 기존 js의 함수 활용 방법
+        function Title() {
+            return (
+                <h3 id='title' onMouseEnter={() => console.log('mouse enter')}>
+                Hello I'm a title
+                </h3>
+            );
+        }
+
+        // react에서의 요소 생성 방법 (코드를 변환시켜야 해서 babel이 필요하다)
+        // 해당 방법으로 만들 때는 첫 글자를 대문자로 만들어줘야 한다
+        const Button = () => (
+        <button style={{
+            backgroundColor: "tomato",
+        }}
+            onClick={() => console.log('im clicked')}
+        >
+        Click me
+        </button>
+        );
+        
+        // 아래 방식으로 기존의 컨테이너처럼 컴포넌트들을 묶어낼 수 있다
+        // 컴포넌트의 첫 글자가 대문자가 아닌 경우 html 태그로 인식될 수 있다
+        const Container = () => <div>
+            <button>check_html_tag</button>
+            <Title/>
+            <Button/>
+        </div>
+
+        ReactDOM.render(<Container />, root); // render를 통해 html로 보여준다
+    </script>
+</html>

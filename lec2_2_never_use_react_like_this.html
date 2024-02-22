@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- 해당 파일에서 사용한 React 방식은 다시는 사용하지 않을 방식이나 이런 방식도 있다 정도를 보는 것 -->
+<html>
+    <body>
+        <div id="root">...</div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script>
+        const root = document.getElementById("root"); // div root 호출
+
+        const h3 = React.createElement("h3", { // span 대신 h3, 변수 이름은 마음대로
+            onMouseEnter: () => console.log('mouse enter'), // property로 eventlistner 생성
+        },
+        "Hello, im a span"); // 보여줄 텍스트
+        const btn = React.createElement("button", { // button 생성, 변수 이름 역시 마음대로
+            onClick : () => console.log('im clicked'), // property로 eventlistner 생성
+            style: { // property로 스타일 지정
+                backgroundColor: "tomato",
+            }
+        },
+        "Click me"); // 보여줄 텍스트
+        const container = React.createElement("div", null, [h3, btn]); // div를 만들어 h3와 btn을 묶음
+
+        // div로 묶은 것을 인자로 넣어 한 번에 render 처리
+        ReactDOM.render(container, root); // render를 통해 html로 보여준다
+    </script>
+</html>

@@ -1,0 +1,12 @@
+react를 사용하기 위해서!
+ -> react와 react-dom을 import 해야 한다
+ react : https://unpkg.com/react@17.0.2/umd/react.production.min.js
+ react-dom : https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js
+  --> react가 호출되었는지 보려면 개발자 도구 console에서 React 명령어를 입력해보면 된다
+
+react를 사용할 땐 html은 같은 페이지에 작성하지 않는다
+
+react는 interactive한 UI를 만들 수 있게 해주고
+react-dom은 해당 코드를 html로 옮길 수 있도록 해준다
+
+react로 만든 요소는 기존 함수처럼 반복해서 호출/사용할 수 있다
