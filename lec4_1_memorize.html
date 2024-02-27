@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+    <body>
+        <div id="root">...</div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <!-- babel을 통해야 react 코드를 웹 브라우저가 알아먹게 변환해 렌더링시킬 수 있다 -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+        // function에 인자를 받아서 활용하기
+        function Btn({text, changeValue}) { // 해당 {} 방식은 shortcut이라고 한다
+            console.log(text, "render here")
+            return (
+                <button
+                    onClick={changeValue}
+                    style={{
+                        background: "tomato",
+                        color: "white",
+                        padding: "10px 20px",
+                        border: 0,
+                        borderRadius: 10,
+                        fontSize: 15,
+                    }}
+                    >
+                    {text}
+                </button>
+            );
+        }
+        // 해당 기능을 통해서 parents component가 변경될 때 다시 rendering 될 필요 없는 child component들을 정의할 수 있다
+        const MemorizedBtn = React.memo(Btn)
+        function App() {
+            const [value, setValue] = React.useState("Save Change");
+            const changeValue = () => setValue("Revert Changes");
+            // custom component에 event listener를 넣어도 하나의 props를 취급될 뿐 event listener가 추가된 것이 아니다
+            // 만약, event listener를 주고 싶다면 component를 만드는 function에다가 줘야 한다
+            return (
+                // 함수처럼 사용하며 인자 전달과 사용이 가능하다
+                // 메모라이즈 기능을 통해서 component 별로 관리가 가능하다
+                <div>
+                    <MemorizedBtn text={value} changeValue={changeValue} />
+                    <MemorizedBtn text="Continue" />
+                </div>
+            );
+        }
+        const root = document.getElementById("root");
+        ReactDOM.render(<App />, root);
+    </script>
+</html>

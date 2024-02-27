@@ -6,14 +6,15 @@
     </body>
     <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
-    <!-- proptype 호출을 통해 어떤 타입의 prop을 받았는지 체크가 가능하다 -->
-    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
     <!-- babel을 통해야 react 코드를 웹 브라우저가 알아먹게 변환해 렌더링시킬 수 있다 -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
 
-        // Props type을 통해서 props 확인하기
-        function Btn({ text, fontSize }) { 
+        // function에 인자를 받아서 활용하기
+        function Btn({banna, big}) { // 해당 {} 방식은 shortcut이라고 한다
+            // Btn(props) 형태로 받을 경우 props.banna 형태로 사용 가능하다
+            console.log(banna, big)
+            // console.log(props.banna, props.big) 해당 형태는 길고 귀찮으니까
             return (
                 <button
                     style={{
@@ -22,25 +23,21 @@
                         padding: "10px 20px",
                         border: 0,
                         borderRadius: 10,
-                        fontSize: fontSize,
+                        fontSize: big ? 18 : 15,
                     }}
-                    >
-                    {text}
+                    > 
+                    {banna}
                 </button>
             );
         }
-        // propTypes에서 [받을 prop의 이름: type 지정] 형태로 체크가 가능하다
-        // react는 ui내에서 어떤 에러도 표시하지 않더라도 propTypes를 통해 최소한 warning 확인이 가능하다
-        // isRequired를 사용하면 props가 넘어오지 않았을 때 warning 메세지를 출력해준다. -> 꼭 넣으라는 것
-        Btn.propTypes = {
-            text: PropTypes.string,
-            fontSize: PropTypes.number.isRequired,
-        };
+
         function App() {
+            
             return (
+                // 함수처럼 사용하며 인자 전달과 사용이 가능하다
                 <div>
-                    <Btn text="Save Changes" fontSize={18} />
-                    <Btn text="Continue" />
+                    <Btn banna="Save Changes" big={true} />
+                    <Btn banna="Continue" big={false} />
                 </div>
             );
         }
